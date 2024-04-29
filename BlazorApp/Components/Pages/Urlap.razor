@@ -15,6 +15,26 @@
     <input type="text" id="lname" name="lname" class="form-control" @bind="newCustomer.Lname" />
 </div>
 
+<div class="col-md-4 mb-3">
+    <label for="email">E-mail:</label><br />
+    <input type="text" id="email" name="email" class="form-control" @bind="newCustomer.Email" />
+</div>
+
+<div class="col-md-4 mb-3">
+    <label for="phonen">Tel:</label><br />
+    <input type="text" id="phonen" name="phonen" class="form-control" @bind="newCustomer.PhoneNumber" />
+</div>
+
+<div class="col-md-4 mb-3">
+    <label for="birthd">Szül. idő:</label><br />
+    <input type="date" id="birthd" name="birthd" class="form-control" @bind="newCustomer.BirthDay" />
+</div>
+
+<div class="col-md-4 mb-3">
+    <label for="price">Ár:</label><br />
+    <input type="number" id="price" name="price" class="form-control" @bind="newCustomer.Price" />
+</div>
+
 @* megjelenítése: *@
 @* <p>@newCustomer.Fname</p> *@
 
@@ -34,12 +54,17 @@
                 <th>Ár</th>
             </tr>
         </thead>
+        
         <tbody>            
             @foreach (var item in CList)
                 {
                  <tr>
                      <td>@item.Fname</td>
                      <td>@item.Lname</td>
+                     <td>@item.Email</td>
+                     <td>@item.PhoneNumber</td>
+                     <td>@item.BirthDay.ToShortDateString()</td>
+                     <td>@item.Price</td>
                  </tr>
                 }           
         </tbody>
@@ -53,11 +78,14 @@
 
     private List<Customer> CList = new();
 
-
-
     private void AddListC()
     {
         CList.Add(newCustomer);
         newCustomer = new Customer();
+    }
+
+    public void validates()
+    {
+        //ide jönne a validáció
     }
 }
