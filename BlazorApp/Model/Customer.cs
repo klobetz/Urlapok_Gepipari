@@ -16,6 +16,12 @@ namespace BlazorApp.Model
         [RegularExpression(@"^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W]{1,})$", ErrorMessage = "Rossz e-mail.")]
         public string? Email { get; set; }
 
+        [Required(ErrorMessage ="A mező kitöltése kötelező")]
+        [MinLength(8, ErrorMessage ="A jelszónak minimum 8 karaktert kell tartalmaznia")]
+        [MaxLength(20, ErrorMessage = "A jelszónak max 20 karaktert kell tartalmaznia")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$", ErrorMessage ="A jelszónak kisbető nagybetű és számot kell tartalmaznia")]
+        public string? Password { get; set; }
+
         [Required(ErrorMessage = "Ezt a mezőt kötelező kitölteni!")]
         public string? PhoneNumber { get; set; }
 
@@ -33,5 +39,16 @@ namespace BlazorApp.Model
         {
             return $"{Fname} {Lname}";          
         }
+
+        public int Age()
+        {
+            int age = DateTime.Now.Year-BirthDay.Year;
+            if (DateTime.Now.Month < BirthDay.Month || DateTime.Now.Month == BirthDay.Month && DateTime.Now.Day < BirthDay.Day)
+            {
+                age--;
+            }
+            return age;
+        }
+
     }
 }

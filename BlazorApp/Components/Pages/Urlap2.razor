@@ -1,6 +1,7 @@
 ﻿@page "/urlap2"
 @using BlazorApp.Model
 @rendermode InteractiveServer
+@using NetcodeHub.Packages.Components.Validations.OnInput
 
 <h3>Űrlap Editform</h3>
 <EditForm class="col-md-4 mb-3" method="post" Model="newcustomer" FormName="CreateCustomer" OnValidSubmit="AddCustomer" Enhance>
@@ -31,6 +32,24 @@
         <ValidationMessage For="()=>newcustomer.PhoneNumber" class="text-danger" />
     </div>
 
+    @* <div class="md-3">
+        <label for="pss">Jelszó:</label>
+        <InputText id="pss"  @bind-Value="newcustomer.Password" class="form-control" />
+        <ValidationMessage For="()=>newcustomer.Password" class="text-danger" />
+    </div> *@
+
+    <div class="md-3 mb-3">
+        <label for="pss">Jelszó:</label>
+        <Text id="pss"  @bind-Value="newcustomer.Password" class="form-control" />
+        <ValidationMessage For="()=>newcustomer.Password" class="text-danger" />
+    </div>
+
+    <div class="md-3">
+        <FloatingText id="pss" Label="Jelszó" @bind-Value="newcustomer.Password" class="form-control" />
+        <ValidationMessage For="()=>newcustomer.Password" class="text-danger" />
+    </div>
+
+
     <div class="md-3">
         <label for="bt">Szül. idő:</label>
         <InputDate id="bt" @bind-Value="newcustomer.BirthDay" class="form-control" />
@@ -57,6 +76,8 @@
                 <th>Tel:</th>
                 <th>Szül. idő</th>
                 <th>Ár</th>
+                <th>Jelszó</th>
+               
             </tr>
         </thead>
 
@@ -69,6 +90,8 @@
                     <td>@item.PhoneNumber</td>
                     <td>@item.BirthDay.ToShortDateString()</td>
                     <td>@item.Price</td>
+                    <td>@item.Password</td>
+                    <td>@item.Age()</td>
                 </tr>
             }
         </tbody>
@@ -87,4 +110,5 @@
         CList.Add(newcustomer);
         newcustomer = new Customer();
     }
+
 }
